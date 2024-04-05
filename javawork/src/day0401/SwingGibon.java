@@ -1,10 +1,10 @@
-package day0328;
+package day0401;
 
 import java.awt.Color;
 
 import javax.swing.JFrame;
 
-public class SwingGibon extends JFrame {
+public class SwingGibon extends JFrame{
     public SwingGibon(String title) {
         // TODO Auto-generated constructor stub
         super(title);
@@ -17,13 +17,14 @@ public class SwingGibon extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        SwingGibon a = new SwingGibon("기본창");
+    public void initDesign()
+    {
+
     }
 
-    public void initDesign() {
-
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        SwingGibon a=new SwingGibon("기본창");
     }
 
 }
