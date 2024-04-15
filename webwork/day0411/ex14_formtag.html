@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        width: 500px;
+        border-collapse: collapse;
+        border: 3px solid gray;
+      }
+
+      tr,
+      td,
+      th {
+        border: 1px solid gray;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>HTML5 폼태그들</h2>
+    <table>
+      <tr>
+        <th width="100">text</th>
+        <td>
+          <input type="text" value="hello" />
+        </td>
+      </tr>
+      <tr>
+        <th width="100">password</th>
+        <td>
+          <input type="password" value="1234" />
+        </td>
+      </tr>
+      <tr>
+        <th width="100">checkbox</th>
+        <td>
+          <label><input type="checkbox" />운전면허</label>
+        </td>
+      </tr>
+      <tr>
+        <th width="100">radio</th>
+        <td>
+          <!--html5 에서는 그룹설정을 하려면 name 을 같게 준다-->
+          <label><input type="radio" name="gender" checked />남자</label>
+          <label><input type="radio" name="gender" />여자</label>
+        </td>
+      </tr>
+      <tr>
+        <th width="100">number</th>
+        <td>
+          <input type="number" min="0" max="10" step="2" value="6" />
+        </td>
+      </tr>
+      <tr>
+        <th width="100">color</th>
+        <td>
+          <input type="color" value="#ffaaff" />
+        </td>
+      </tr>
+      <tr>
+        <th width="100">date</th>
+        <td>
+          <input type="date" value="2024-01-01" />
+        </td>
+      </tr>
+      <tr>
+        <th width="100">button</th>
+        <td>
+          <input type="button" value="버튼1" />
+          &nbsp;
+          <button type="button">버튼2</button>
+        </td>
+      </tr>
+      <tr>
+        <th width="100">select</th>
+        <td>
+          <select>
+            <option hidden disabled selected>select value</option>
+            <option>사과</option>
+            <option>딸기</option>
+            <option>망고</option>
+            <option>수박</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th width="100">select</th>
+        <td>
+          <select size="5" multiple>
+            <!--여러개 선택 가능-->
+            <option>자바</option>
+            <option>HTML5</option>
+            <option>JavaScript</option>
+            <option>SpringBoot</option>
+            <option>Mysql8</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th width="100">progress</th>
+        <td>
+          <progress max="10" value="5"></progress>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

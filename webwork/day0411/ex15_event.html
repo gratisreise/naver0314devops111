@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>버튼 이벤트-태그삽입형</h1>
+    <button type="button" onclick="alert('Hello!!')">이벤트 #1</button>
+
+    <h1>이미지 이벤트-태그 하나에 이벤트는 여러개 가능</h1>
+    <img
+      src="../image/food/11.jpg"
+      width="200"
+      height="200"
+      onmouseover="this.src='../image/food/1.jpg'"
+      onmouseout="this.src='../image/food/11.jpg'"
+    />
+
+    <h1>이미지 이벤트-태그 하나에 이벤트는 여러개 가능 #2</h1>
+    <img
+      src="../image/talent/13.jpg"
+      width="200"
+      onmouseenter="this.src='../image/talent/11.jpg'"
+      onmouseleave="this.src='../image/talent/13.jpg'"
+    />
+  </body>
+</html>

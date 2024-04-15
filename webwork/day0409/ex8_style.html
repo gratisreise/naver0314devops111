@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      /*모든 div 에 적용됨*/
+      /*
+        div{
+          border-style: dotted;
+          border-color: green;
+          border-width: 2px;  
+        }
+        */
+
+      /* .one: 모든 태그의 class one을 의미*/
+      .one {
+        color: hotpink;
+      }
+
+      /*div 태그중 class 가 one 인 경우 */
+      div.one {
+        border: 5px groove orange;
+        margin-bottom: 10px; /*태그 바깥쪽 아래의 여백*/
+        width: 300px;
+      }
+
+      /* 공백:하위태그,>:바로밑태그 */
+      div.five img {
+        width: 200px;
+      }
+      3 div.five > img {
+        border: 10px solid green;
+      }
+
+      div.five > div > img {
+        border: 10px inset gold;
+      }
+
+      /* id가 four 인태그 바로 아래의 img에 적용*/
+      #four > img {
+        width: 150px;
+        border: 7px double gray;
+      }
+
+      div.one h3 {
+        text-shadow: 3px 3px 3px gray;
+      }
+
+      div.one > h3 {
+        background-color: aquamarine;
+      }
+
+      div.one > div {
+        border: 2px dashed palevioletred;
+        margin-top: 10px;
+        box-shadow: 5px 5px 5px gray;
+      }
+
+      #three > div {
+        border: 3px dotted mediumaquamarine;
+        background-color: darkgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="one">
+      <div>One Tag</div>
+      <div>
+        <h3>Hello h3</h3>
+        <h4>Hello h4</h4>
+      </div>
+    </div>
+    <div class="one">
+      <h3>hello h3</h3>
+    </div>
+    <div id="three">
+      <div>Three Tag</div>
+      <h3 class="one">Hello h3</h3>
+      <h5>Hello h5</h5>
+    </div>
+    <div id="four">
+      <img src="../image/food/1.jpg" />
+    </div>
+    <div class="five">
+      <img src="../image/food/2.jpg" />
+    </div>
+    <div class="five">
+      <img src="../image/food/11.jpg" />
+    </div>
+    <div class="five">
+      <div>
+        <img src="../image/food/12.jpg" />
+      </div>
+    </div>
+  </body>
+</html>

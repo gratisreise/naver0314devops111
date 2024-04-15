@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background: #222;
+        height: 100%;
+        margin: 0;
+      }
+
+      #container {
+        position: absolute;
+        left: 50%;
+        margin-left: -450px;
+        width: 1100px;
+        height: 100%;
+        background: #fff;
+      }
+
+      aside {
+        float: left;
+        width: 250px;
+        padding: 20px 50px;
+        height: 100%;
+        background: rgb(204, 204, 204);
+      }
+
+      aside > div > img {
+        width: 120px;
+        height: 120px;
+        border: 1px solid gray;
+        border-radius: 100px;
+      }
+
+      #main {
+        float: right;
+        padding: 20px;
+        margin: 10px;
+      }
+
+      table {
+        width: 70%;
+        border: 1px solid #222;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background: #eee;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 5px;
+        font-size: 0.9em;
+        font-family: "Gaegu";
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+    Semantic은 '의미의', '의미론적인'이라는 뜻을 가진 형용사이다. 
+    따라서 시맨틱 태그란 의미가 있는 태그를 말한다.
+-->
+    <div id="container">
+      <!--사이드바-->
+      <aside>
+        <div id="namecard">
+          <img src="../image/talent/11.jpg" />
+          <h3>Candy Lee</h3>
+          <p>오늘을 즐겁게 살자!!</p>
+        </div>
+
+        <div id="detail">
+          <p>Seoul,Korea</p>
+          <p>Candy@naver.com</p>
+        </div>
+
+        <div id="sns">
+          <h2>SNS</h2>
+          <ul>
+            <li>
+              <a href="http://www.facebook.com">facebook</a>
+            </li>
+            <li>
+              <a href="http://www.Instagram.com">Instagram</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!--main-->
+      <div id="main">
+        <!--자기소개-->
+        <section>
+          <h3 class="subtitle">Profile</h3>
+          <p>
+            <mark>프런트 앤드 웹 기술(Front-end WebTech)</mark>에 관심이 많아
+            프로젝트 개발중입니다
+            <br />
+            현재는 스타트업에서 백앤드 웹개발 중입니다
+          </p>
+        </section>
+
+        <!--경력-->
+        <section>
+          <h3 class="subtitle">Employeement History</h3>
+          <ul>
+            <li>
+              백엔드 개발
+              <ul>
+                <li>자바프로젝트</li>
+                <li>Oracle Database</li>
+                <li>Spring Boot를 이용한 프로젝트</li>
+              </ul>
+            </li>
+            <li>
+              프론트엔드 개발
+              <ul>
+                <li>css</li>
+                <li>HTML</li>
+                <li>Java Script</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <!--학력-->
+        <section>
+          <h3 class="subtitle">Education</h3>
+          <table>
+            <caption>
+              <b>학력사항</b>
+            </caption>
+            <thead>
+              <tr>
+                <th>출신학교</th>
+                <th>전공</th>
+                <th>기간</th>
+                <th>구분</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>**대학교</td>
+                <td>영어영문학과</td>
+                <td>2015.3~2000.2</td>
+                <td>졸업</td>
+              </tr>
+              <tr>
+                <td>**고등학교</td>
+                <td>-</td>
+                <td>2012.3~2015.2</td>
+                <td>졸업</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

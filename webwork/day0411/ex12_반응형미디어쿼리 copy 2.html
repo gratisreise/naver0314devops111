@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      h1 {
+        font-family: "Gaegu";
+      }
+
+      /*1024 이상인경우*/
+      @media all and (min-width: 1024px) {
+        body {
+          background-color: aquamarine;
+          background: url("../image/mycar/mycar11.png") 30px 100px no-repeat;
+        }
+        h1 {
+          color: palevioletred;
+        }
+      }
+
+      /*761~1023 인경우*/
+      @media all and (min-width: 761px) and (max-width: 1023px) {
+        body {
+          background-color: navajowhite;
+        }
+        h1 {
+          color: gray;
+        }
+      }
+
+      /*0~760 인경우*/
+      @media all and (max-width: 760px) {
+        body {
+          background-color: hotpink;
+          background-size: 100px 100px;
+          background: url("../image/mycar/mycar13.png") 30px 100px no-repeat;
+        }
+        h1 {
+          color: black;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>반응형 테스트</h1>
+  </body>
+</html>

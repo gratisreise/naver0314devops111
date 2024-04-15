@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div.box > div {
+        border: 1px solid gray;
+        width: 200px;
+        height: 200px;
+        float: left;
+        margin: 30px;
+      }
+
+      div.box > div > img {
+        width: 100px;
+        height: 100px;
+      }
+
+      #img1 img {
+        transform: translate(50px, 30px); /*위치 이동*/
+        /*크로스 브라우징 테스트를 위해서 아래 코드처럼 넣어주는게 좋다*/
+        -webkit-transform: translate(50px, 30px); /*크롬,사파리*/
+        -o-transform: translate(50px, 30px); /*오페라*/
+        -moz-transform: translate(50px, 30px); /*익스플로러*/
+      }
+
+      #img2 img {
+        transform: rotate(45deg); /*45도 회전*/
+      }
+
+      #img3 img {
+        transform: scale(2); /*2배 확대,scale,scaleX,scaleY*/
+      }
+
+      #img4 img {
+        transform: skew(30deg, 40deg); /*x,y방향으로 경사변형을 준다*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div id="img1">
+        <img src="../image/mycar/mycar13.png" />
+      </div>
+      <div id="img2">
+        <img src="../image/mycar/mycar13.png" />
+      </div>
+      <div id="img3">
+        <img src="../image/mycar/mycar13.png" />
+      </div>
+      <div id="img4">
+        <img src="../image/mycar/mycar13.png" />
+      </div>
+    </div>
+  </body>
+</html>

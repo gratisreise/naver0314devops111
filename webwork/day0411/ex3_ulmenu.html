@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      div.menu ul {
+        list-style: none;
+      }
+      div.menu ul li {
+        float: left;
+        font-family: "Gaegu";
+        width: 150px;
+        border: 1px solid gray;
+        margin-right: 10px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px; /*한줄일경우 height와 같게 설정하면 세로방향 가운데정렬된다*/
+        font-size: 1.5em;
+        background-color: lightblue;
+        color: blue;
+        border-radius: 30px; /*모서리 둥글게*/
+        box-shadow: 5px 5px 5px gray;
+        cursor: pointer; /*커서모양 변경*/
+      }
+
+      div.menu ul li:hover {
+        /*마우스 오버시 적용*/
+        background-color: palevioletred;
+        color: white;
+      }
+
+      div.menu ul li:active {
+        /*마우스 클릭시 적용*/
+        background-color: black;
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h3><b>ul 을 이용한 간단한 메뉴 만들기</b></h3>
+    <div class="menu">
+      <ul>
+        <li>Home</li>
+        <li>샵소개</li>
+        <li>방명록</li>
+        <li>게시판</li>
+        <li>오시는길</li>
+      </ul>
+    </div>
+  </body>
+</html>
