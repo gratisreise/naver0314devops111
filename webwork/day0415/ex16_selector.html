@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>one</div>
+    <div>two</div>
+    <div>three</div>
+
+    <div class="lang">
+      <div class="box">java</div>
+      <div class="box">jsp</div>
+      <div class="box">javascript</div>
+    </div>
+    <div class="mycar">
+      <div>
+        <img src="../image/mycar/mycar13.png" width="130" />
+      </div>
+      <div>
+        <img src="../image/mycar/mycar15.png" width="130" />
+      </div>
+      <div>
+        <img src="../image/mycar/mycar5.png" width="130" />
+      </div>
+    </div>
+
+    <script>
+      //querySelector : 첫번째값의 요소값만 얻는다(배열아님)
+      //querySelectorAll : 모든 요소값을 배열타입으로 얻는다
+
+      let a = document.querySelector("div"); //div 태그중 첫번째 태그값
+      a.style.border = "2px dotted red";
+
+      let b = document.querySelector("div.lang>div.box"); //해당 셀렉터 요소중 첫번째요소
+      b.style.backgroundColor = "orange";
+
+      let c = document.querySelectorAll("div.mycar>div>img"); //모든 요소값(배열타입)
+      for (let cc of c) cc.style.border = "5px inset green";
+
+      let d = document.querySelectorAll("div.lang>div.box");
+      for (let dd of d) {
+        dd.style.fontFamily = "Comic Sans MS";
+        //dd.style.color="red";
+        let r = parseInt(Math.random() * 256);
+        let g = parseInt(Math.random() * 256);
+        let b = parseInt(Math.random() * 256);
+        dd.style.color = `rgb(${r},${g},${b})`;
+        dd.style.fontSize = "2em";
+      }
+    </script>
+  </body>
+</html>

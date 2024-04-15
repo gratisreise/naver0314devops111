@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        document.getElementById("sel1").onchange = function () {
+          msg1.innerHTML = "<b>" + this.value + " 선택!</b>";
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <h2>select 이벤트</h2>
+    <select id="sel1">
+      <option>사과</option>
+      <option>딸기</option>
+      <option>수박</option>
+      <option>망고</option>
+    </select>
+    <h2 id="msg1">result</h2>
+    <hr />
+    <select id="sel2">
+      <option value="http://www.naver.com">네이버</option>
+      <option value="http://www.nate.com">네이트</option>
+      <option value="http://www.google.com">구글</option>
+      <option value="http://cafe.naver.com/zipsy">수업카페</option>
+    </select>
+    <h2 id="msg2">result</h2>
+    <script>
+      document.getElementById("sel2").onchange = function () {
+        //value 가 있을경우 option 사이의 라벨을 읽는방법
+        let label = this.options[this.selectedIndex].label;
+        msg2.innerHTML = "<b>" + this.value + ":" + label + "</b>";
+        //페이지 이동하는 함수
+        //location.href="이동할 url";
+        //location.href=this.value;
+      };
+    </script>
+  </body>
+</html>

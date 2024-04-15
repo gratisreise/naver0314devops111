@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        let photo = document.getElementById("photo");
+        //점점작게 이벤트(너비 10씩 감소)
+        document.getElementById("btnsmall").onclick = function () {
+          //현재 이미지의 너비
+          let w = photo.getAttribute("width");
+          w -= 10;
+          photo.setAttribute("width", w);
+        };
+        //점점크게 이벤트(너비 10씩 증가)
+        document.getElementById("btnlarge").onclick = function () {
+          //현재 이미지의 너비
+          let w = photo.getAttribute("width");
+          //w+=10;//w는 string 타입이므로 "200"+10=20010 이 된다
+          w = Number(w) + 10; //그래서 w를 일단 숫자로 변환후 더해야한다
+          photo.setAttribute("width", w);
+        };
+        //select 이벤트:사진변경,라벨 얻어서 msg 에 출력
+        document.getElementById("selphoto").onchange = function () {
+          let p = this.value;
+          let name = this.options[this.selectedIndex].label;
+
+          photo.setAttribute("src", p);
+          msg.innerHTML = `<b style="color:green;">${name}</b> 입니다`;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <h2>문제:이미지 크기변경및 사진병경하기</h2>
+    <button type="button" id="btnsmall">점점작게</button>
+    <button type="button" id="btnlarge">점점크게</button>
+    <select id="selphoto">
+      <option value="../image/talent/15.jpg">설현</option>
+      <option value="../image/talent/17.jpg">신민아</option>
+      <option value="../image/talent/19.jpg">수지</option>
+      <option value="../image/talent/12.jpg">박보영</option>
+    </select>
+
+    <br /><br />
+    <img src="../image/talent/15.jpg" id="photo" width="200" />
+    <h2 id="msg">설현입니다</h2>
+  </body>
+</html>

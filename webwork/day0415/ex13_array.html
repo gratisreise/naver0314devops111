@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        float: left;
+        border: 1px solid black;
+        margin-right: 5px;
+        border-radius: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let arr1 = new Array();
+      arr1.push("red");
+      arr1.push("green");
+      arr1.push("yellow");
+      arr1.push("pink");
+
+      for (let i = 0; i < arr1.length; i++) {
+        let s = `
+            <div style="background-color:${arr1[i]}" class="box">                
+            </div>
+        `;
+        document.write(s);
+      }
+
+      arr1.pop(); //마지막 추가된 데이타 제거
+      arr1.pop(); //마지막 추가된 데이타 제거
+      document.write("<hr style='clear:both'>");
+      for (let i = 0; i < arr1.length; i++) {
+        let s = `
+            <div style="background-color:${arr1[i]}" class="box">                
+            </div>
+        `;
+        document.write(s);
+      }
+
+      //2개를 다시 추가
+      arr1.push("#98fb98");
+      arr1.push("#ff1493");
+      document.write("<hr style='clear:both'>");
+      for (let i = 0; i < arr1.length; i++) {
+        let s = `
+            <div style="background-color:${arr1[i]}" class="box">                
+            </div>
+        `;
+        document.write(s);
+      }
+      document.write("<hr style='clear:both'>");
+    </script>
+    <h2>for문의 of 를 이용한 배열 출력</h2>
+    <script>
+      let arr2 = ["그랜져", "아반떼", "미니", "벤츠", "아우디"];
+
+      for (let a of arr2) {
+        //자바의 : for문과 같다
+        document.write(a + "<br>");
+      }
+      document.write("<hr>");
+      for (let idx in arr2) {
+        document.write(arr2[idx] + "<br>");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #msg {
+        font-size: 20px;
+        width: 300px;
+        padding: 10px;
+        height: auto;
+        border: 5px groove palevioletred;
+        margin-top: 20px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        let img1 = document.getElementById("img1");
+
+        document.getElementById("btn1").onclick = function () {
+          //이미지의 각종 속성값을 얻어보자
+          let src = img1.getAttribute("src");
+          let w = img1.getAttribute("width");
+          let t = img1.getAttribute("title");
+
+          msg.innerHTML = `
+                이미지 src : ${src}<br>
+                이미지 title : ${t}<br>
+                이미지 너비 : ${w}
+                `;
+        };
+
+        //버튼2 이벤트
+        document.getElementById("btn2").onclick = function () {
+          img1.setAttribute("src", "../image/mycar/mycar15.png");
+          img1.setAttribute("width", "300");
+          img1.setAttribute("title", "다같이 떠나요!");
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <h2>setAttribute,getAttribute 공부하기</h2>
+    <img
+      id="img1"
+      src="../image/mycar/mycar13.png"
+      width="200"
+      title="나의 핑크자동차"
+    />
+    <br /><br />
+    <button type="button" id="btn1">속성값 얻기</button>
+    <button type="button" id="btn2">속성값 변경</button>
+
+    <br />
+    <div id="msg">result</div>
+  </body>
+</html>

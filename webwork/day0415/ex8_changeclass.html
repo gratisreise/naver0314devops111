@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <select id="selcolor">
+      <option hidden disabled selected>글자색을 선택하세요</option>
+      <option value="#ff69b4">핑크</option>
+      <option value="#00fa9a">초록</option>
+      <option value="#afeeee">하늘</option>
+      <option value="#ee82ee">보라</option>
+    </select>
+    <select id="selfont">
+      <option hidden disabled selected>글꼴을 선택하세요</option>
+      <option>Dancing Script</option>
+      <option>East Sea Dokdo</option>
+      <option>Gaegu</option>
+      <option>Single Day</option>
+    </select>
+    <select id="selsize">
+      <option hidden disabled selected>글자크기를 선택하세요</option>
+      <script>
+        for (let i = 10; i <= 50; i += 5) {
+          let s = `<option>${i}px</option>`;
+          document.write(s);
+        }
+      </script>
+    </select>
+    <div id="msg" style="margin-top: 20px; font-size: 15px">
+      Have a Nice Day<br />
+      오늘은 비가 오는 월요일입니다
+    </div>
+    <script>
+      let m = document.getElementById("msg");
+
+      //글자색
+      document.getElementById("selcolor").onchange = function () {
+        m.style.color = this.value;
+      };
+
+      //글꼴
+      document.getElementById("selfont").onchange = function () {
+        m.style.fontFamily = this.value;
+      };
+      //크기
+      document.getElementById("selsize").onchange = function () {
+        m.style.fontSize = this.value;
+      };
+    </script>
+  </body>
+</html>

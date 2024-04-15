@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        //해당 아이디가 존재하면 요소값을 얻는다(자바의 인스턴스 변수와 같음, 없을경우 null 값 반환)
+        let b3 = document.getElementById("btn3");
+        b3.onclick = function () {
+          alert("버튼 3번을 클릭했어요!!");
+        };
+      };
+
+      function test2() {
+        alert("함수 2를 호출햇어요 !!");
+      }
+    </script>
+  </head>
+  <body>
+    <button type="button" onclick="test()">함수 호출 #1</button>
+    <!--body 안에서 함수를 구현할경우 호출하는 위치보다는 아래에 함수구현-->
+    <script>
+      function test() {
+        alert("함수를 호출했어요!!");
+      }
+    </script>
+
+    <button type="button" onclick="test2()">함수 호출 #2</button>
+
+    <button type="button" id="btn3">함수 호출 #3</button>
+
+    <button type="button" id="btn4">함수 호출 #4</button>
+    <script>
+      let b4 = document.getElementById("btn4");
+      b4.onclick = function () {
+        alert("버튼 4를 클릭했어요!!");
+      };
+    </script>
+  </body>
+</html>

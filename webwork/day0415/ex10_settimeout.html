@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        let p = document.getElementById("photo1");
+        //3초뒤에 호출되는 함수
+        setTimeout(function () {
+          msg.innerHTML = n;
+          p.setAttribute("src", "../image/food/1.jpg");
+          p.style.border = "10px solid gray";
+        }, 3000);
+
+        //1초마다 출력
+        let n = 0;
+        let s = setInterval(function () {
+          n++;
+          msg.innerHTML = n;
+          if (n == 4) {
+            clearInterval(s); //함수호출을 끔냄
+            msg.innerHTML = "Finish!!";
+          }
+        }, 1000);
+      };
+    </script>
+  </head>
+  <body>
+    <img src="../image/food/11.jpg" id="photo1" width="200" />
+    <div style="font-size: 3em" id="msg"></div>
+  </body>
+</html>

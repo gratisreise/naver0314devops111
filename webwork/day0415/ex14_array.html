@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr1 = new Array();
+      arr1[0] = "../image/shop/8.jpg";
+      arr1[1] = "../image/shop/14.jpg";
+      arr1.push("../image/shop/30.jpg");
+      arr1.push("../image/shop/23.jpg");
+
+      for (let photo of arr1) {
+        let s = `<img src="${photo}" class="photo" width=40 border=1 hspace=10 style="cursor:pointer">`;
+        document.write(s);
+      }
+    </script>
+    <br /><br /><br />
+    <img id="large" src="../image/shop/8.jpg" border="10" width="300" />
+    <script>
+      //작은 이미지 클릭시 큰 이미지 변경
+      let large = document.getElementById("large");
+      let photo = document.getElementsByClassName("photo"); //photo 는 배열타입
+      for (let p of photo) {
+        p.onclick = function () {
+          //작은 이미지의 src
+          let src = this.getAttribute("src");
+          //큰이미지 변경
+          large.setAttribute("src", src);
+        };
+      }
+    </script>
+  </body>
+</html>

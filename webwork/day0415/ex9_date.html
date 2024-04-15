@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      window.onload = function () {
+        //1000:1초
+        //1초 단위로 함수 실행
+        setInterval(function () {
+          let date = new Date();
+          let hh = date.getHours();
+          let mm = date.getMinutes();
+          let ss = date.getSeconds();
+          document.getElementById("timer").innerHTML = `${hh}:${mm}:${ss}`;
+        }, 1000);
+      };
+    </script>
+  </head>
+  <body>
+    <h1>
+      오늘 날짜 :
+      <script>
+        let date = new Date();
+        let y = date.getFullYear(); //년도 4글자 반환(자바때처럼 +1900 안해도됨)
+        let m = date.getMonth() + 1; //0~11 까지 반호나하므로 +1 해야한다
+        let d = date.getDate();
+
+        document.write(`${y}-${m}-${d}`);
+      </script>
+    </h1>
+    <h1>
+      현재 시간 :
+      <script>
+        let hh = date.getHours();
+        let mm = date.getMinutes();
+        let ss = date.getSeconds();
+        document.write(`${hh}:${mm}:${ss}`);
+      </script>
+    </h1>
+    <h1 id="timer">
+      <script>
+        document.write(`${hh}:${mm}:${ss}`);
+      </script>
+    </h1>
+  </body>
+</html>
