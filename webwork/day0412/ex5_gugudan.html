@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 3px groove gray;
+      }
+
+      tr {
+        height: 40px;
+        border: 1px solid lightgray;
+      }
+      td,
+      th {
+        border: 1px solid lightgray;
+        font-size: 15px;
+        font-family: "Comic Sans MS";
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <caption>
+        <h3>[전체 구구단]</h3>
+      </caption>
+      <tr style="background-color: pink">
+        <script>
+          for (let dan = 2; dan <= 9; dan++) {
+            let s = `<th>${dan}단</th>`;
+            document.write(s);
+          }
+        </script>
+      </tr>
+      <script>
+        for (let i = 1; i <= 9; i++) {
+          document.write("<tr>");
+          for (let dan = 2; dan <= 9; dan++) {
+            document.write(`<td>${dan}X${i}=${dan * i}</td>`);
+          }
+          document.write("</tr>");
+        }
+      </script>
+    </table>
+    <hr />
+    <table>
+      <script>
+        for (i = 0; i <= 9; i++) {
+          document.write("<tr>");
+          let s;
+          for (j = 2; j <= 9; j++) {
+            if (i == 0) {
+              s = `<th>${j}단</th>`;
+            } else {
+              s = `<td>${j} x ${i} = ${i * j}</td>`;
+            }
+            document.write(s);
+          }
+          document.write("</tr>");
+        }
+      </script>
+    </table>
+  </body>
+</html>

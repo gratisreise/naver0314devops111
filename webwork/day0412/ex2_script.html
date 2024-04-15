@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>
+      <script>
+        for (let i = 1; i <= 10; i++) {
+          document.write(i + "&nbsp;");
+        }
+      </script>
+    </h2>
+    <h2>
+      <script>
+        for (let i = 1; i <= 10; i++) {
+          if (i % 2 == 0)
+            //짝수인경우는 i++ 로 이동
+            continue;
+          document.write(i + "&nbsp;");
+        }
+      </script>
+    </h2>
+    <h2>
+      <script>
+        for (let i = 1; i <= 10; i++) {
+          if (i == 5) break;
+          document.write(i + "&nbsp;");
+        }
+      </script>
+    </h2>
+    <h2>food 의 12개 이미지 출력하기</h2>
+    <script>
+      for (let i = 1; i <= 12; i++) {
+        //es6 의 템플릿 리터럴 기능을 이용해서 출력
+        //let s=`<img src="../image/food/${i}.jpg" width=120>`;
+
+        //es5 의 방법으로 해보자
+        let s = "<img src='../image/food/" + i + ".jpg' width=120>";
+        document.write(s);
+        if (i % 3 == 0) document.write("<br>");
+      }
+    </script>
+  </body>
+</html>
