@@ -77,12 +77,12 @@ public class Ex4SawonSearchName2 {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Ex4SawonSearchName2 ex3=new Ex4SawonSearchName2();
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String searchName="";
         while(true)
         {
             System.out.println("검색할 이름을 입력해주세요(종료:x)");
-            searchName=sc.nextLine();
+            searchName = sc.nextLine();
             if(searchName.equalsIgnoreCase("x"))
             {
                 System.out.println("종료합니다");

@@ -1,0 +1,405 @@
+mysql 공부하기
+
+0. status : 현재 상태확인(버전,한글상태,포트,db명...)
+   
+1. 접속 : cmd 창에서
+    mysql -u root -p 엔터
+    비밀번호 쓰고 엔터
+
+2. database 목록확인하기
+  show databases;
+  mysql -> 계정추가,삭제,확인...
+  test  -> 연습용
+
+3. 데이타베이스 이동  use 데이타베이스명;
+   데이타베이스 생성  create database db명
+   데이타베이스 삭제  drop database db명;
+
+4. db 안에 생성된 테이블들 확인하기
+   show tables;  
+
+5. 현재날짜와 시간 확인하기
+  select now() from dual;
+  select sysdate() from dual;
+  select current_timestamp() from dual;
+
+6. 날짜함수들
+   year(날짜) :년도만 추출
+   month(날짜) :월만 추출
+   monthname(날짜) :월을영어로
+   dayname(날짜) :요일을 영어로
+   dayofmonth(날짜) : 날짜의 월별 일자
+   date_format(날짜,'형식') : 날짜를 형식에 맞게 출력
+               :  select date_format(now(),'%Y-%m-%d %H:%i') from dual;
+   str_to_date('20110512','%Y%m%d') : 날짜형태의 문자열을 date 타입으로
+              :  select str_to_date('20110512','%Y%m%d') from dual;
+
+
+7. 오라클처럼 시퀀스가 없다
+   시퀀스를 주고싶으면  테이블 생성시 컬럼뒤에 auto_increment 를 주면 된다
+
+8. 데이타타입
+   문자 : char,varchar
+   숫자 : tinyint  1 byte
+          smallint  2byte
+          mediumint 3byte
+          int       4byte
+          bigint    8byte
+          float     실수타입 4byte
+          double      "      8byte
+          decimal(m,n) : m자리수,n소숫점자릿수
+   날짜 : date   CCYY-MM-DD  
+          datetime   CCYY-MM-DD hh:mm:ss
+          timestamp     "
+          time          hh:mm:ss
+          year        CCYY 또는 YY
+
+-----------------------------------------------------------
+**  테이블 생성  TEST01
+   num  tinyint 시퀀스,기본키
+   name 문자
+   age  smallint
+   height decimal(5,1)
+   birthday  datetime
+   ipsaday date
+
+   create table test01 (num tinyint auto_increment primary key,
+      name varchar(20), age smallint,
+     height decimal(5,1),birthday datetime, ipsaday date);
+
+** 테이블 구조확인   desc 테이블명
+   좀더 디테일한 구조 확인  show create table 테이블명 
+
+** test01 테이블에 데이타 넣기
+  insert into test01 (name,age,height,birthday,ipsaday) values ('이문희',23,167.8,
+      now(),now());
+insert into test01 (name,age,height,birthday,ipsaday) values ('강철수',31,178.5,
+      '2011-10-10','2017-12-25');
+
+insert into test01 (name,birthday,ipsaday) values ('이영자','1978-09-09','2014-01-01');
+insert into test01 (name,age,height) values ('강호동',56,156.9);
+
+** 널값을 다른값으로 출력하는 함수
+   오라클 : NVL , mysql : ifnull
+
+  나이가 null 이면 0 으로 출력하기
+   select num,name,ifnull(age,0) from test01;
+
+** 테이블 구조변경
+  컬럼 추가  add
+  컬럼 제거 drop column
+  컬럼 타입 수정 modify
+  컬럼명 변경 change 구컬럼명 신컬럼명 컬럼타입(버전 5)
+                   rename column 구컬럼명 to 뉴컬럼명(버전 8)
+  테이블명  alter table 현재테이블명 rename 새테이블명
+
+** 부분데이타 조회(페이징처리시 사용하는 명령)
+  select * from 테이블명 limit 시작인덱스,출력할갯수
+    => 이때 시작인덱스는 0부터이다
+
+
+set autocommit=0 <= autocommit 해제
+set autocommit=1 <= 다시 autocommit 지정
+
+트랜잭션 (교제 : 328)
+mysql 은 기본적으로 autocommit 이다(자동으로 커밋됨)
+트랜잭션을 적용하려면
+start transactipon;  <=트랜잭션 상태 시작
+delete from sawon where age>=30; <= 삭제
+select * from sawon; <=삭제후 출력
+rollback ;  <=삭제한거 모두 취소됨
+select * from sawon; <=삭제된거 다시 생겨있음
+다른 방법
+set autocommit =0;  <= 오토커밋상태 끔
+set autocommit =1;  <= 오토커밋상태 켬(기본값)
+[실습]
+set autocommit =0;
+insert into sawon (name) values ('마이클');
+savepoint a;
+insert into sawon (name) values ('캐서린');
+select name from sawon; <=마이클,캐서린 출력
+rollback to a; <=캐서린만 insert 취소
+select name from sawon; <=마이클만 출력
+
+---------------------------------------------------------------------------
+새로운 테이블 생성
+  테이블명 : sawon
+    번호   num  smallint 시퀀스기능
+    사원명 name 문자(20)
+    입사시험점수 score smallint
+    성별  gender 문자(10)
+    부서 buseo  문자(10)
+
+  제약조건 : 기본키  pk_sawon_num 
+             체크    ck_sawon_score : 0~100 
+             성별    ck_sawon_gender : '여자','남자'
+
+
+        create table sawon (
+              num smallint auto_increment,
+              name varchar(20),
+              score smallint,
+              gender varchar(10),
+              buseo varchar(10),
+              constraint pk_sawon_num primary key(num),
+  		constraint ck_sawon_score check (score between 0 and 100),
+ 		constraint ck_sawon_gender check (gender in ('여자','남자')));
+
+
+       [데이타추가]
+  	insert into sawon (name,score,gender,buseo) values ('이하나',100,'여자','홍보부');
+
+	-- mysql 에서 제약조건 확인하기
+         select * from information_schema.table_constraints where table_name='sawon';
+
+
+  ** 관련함수들
+   1. concat('문자열1,'문자열2'...) -문자열을 이어준다
+   2. replace('문자열','기존문자열','바뀔문자열') :문자열중에서 기존문자열이 있으면 
+                          새로운문자열로 바꿔준다    
+   3. instr('문자열','찾는문자열') : 문자열중 찾는문자열의 위치값을 반환
+   4. left('문자열',개수) : 문자열중 왼쪽에서 개수만큼 추출
+   5. right('문자열',개수) :문자열중 오른쪽에서 개수만큼 추출
+   6. mid('문자열',시작위치,개수) : 문자열에서 시자위치부터 개수만큼 추출
+   7. substring('문자열',시작위치,개수) : 문자열에서 시자위치부터 개수만큼 추출
+   8. ltrim('문자열') : 왼쪽의 공백만 제거
+   9. rtrim('문자열') : 오른쪽의 공백만 제거
+   10. trim('문자열') :d양쪽의 공백 제거
+   11. lcase('문자열') 또는 lower('문자열') : 소문자로
+  12. ucase('문자열') 또는 upper('문자열') : 대문자로
+  13. reverse('문자열') : 거꾸로 출력
+ 
+그룹함수
+   14. count(컬럼명) :갯수
+   15. sum(컬럼명)  :합계
+   16. avg(컬럼명)  :평균
+   17. max(컬럼명)  :최대값
+   18. min(컬럼명)  :최소값
+
+ 조건함수
+   19. if(논리식,참일때값1,거짓일때값2) : 참이면 값1 출력, 거짓이면 값2출력
+   20. ifnull (값1,값2) : 값1이 널값이면 값2를 출력, 아니면 그대로 값1 출력
+
+ 숫자함수
+   21. abs(숫자) : 절대값
+   22. ceiling(숫자) : 무조건올림
+   23. floor(숫자) : 무조건내림
+   24. truncate('숫자',n) :숫자를 소숫점 n 자리에서 버림
+   25. pow(x,y) : x의y승
+   26. mod(숫자1,숫자2) : 숫자1을 숫자2로 나눈 나머지
+   27. greatest(숫자1,숫자2,....) : 전체 숫자중 가장 큰 숫자
+   28. least(숫자1,숫자2,....) : 전체 숫자중 가장 작은 숫자
+   
+
+[실습]
+
+select name,score,if(score>=90,'Good','Bad') ,buseo from sawon;
+se
+select buseo 부서,sum(score) 합계,round(avg(score),1) 평균,
+  max(score) 최고점수,min(score) 최저점수 from sawon 
+       group by buseo;
+
+select concat('happy','day') from dual; /*문자열더함*/
+select concat('apple','kiwi','mango') from dual;
+select replace('have a nice day','a','*') from dual;
+select instr('happy','a') from dual;
+select instr('happy','x') from dual;
+select left('have a nice day',4) from dual;
+select right('have a nice day',5) from dual;
+select mid('have a nice day',8,4) from dual;
+select substring('have a nice day',8,4) from dual;
+select left('가나다라마바사',3) from dual; /*한글도3글자 나옴*/
+select substring('가나다라마바사',4,2) from dual;
+select concat(ltrim('   abc    '),'*') from dual;
+select concat(rtrim('   abc    '),'*') from dual;
+select concat(trim('   abc    '),'*') from dual;
+select lcase('Happy'),lower('Happy') from dual;
+select ucase('Happy'),upper('Happy') from dual;
+select reverse('Happy') from dual;
+select abs(-10) from dual;/*무조건 양수값 반환*/
+select ceiling(2.1) from dual; /*무조건올림  3 */
+select floor(2.9) from dual; /*무조건내림  2 */
+select truncate(2.345,2) from dual; /*소숫점2자리까지 출력되고 3자리에서 내림*/
+select mod(5,3) from dual;/*5를 3으로 나눈나머지=2*/
+select greatest(12,23,34,11,4) from dual;/*가장 큰숫자*/
+select least(12,23,34,11,4) from dual;/*가장 작은숫자*/
+
+======================================================================
+Mysql 에서 계정 생성하기
+
+  1. use mysql   =>root 계정의 mysql db 로 들어가서 실행
+
+  2. create database my; => my 라는 db 생성
+
+  3. 계정생성과 권한주기(angel 이라는 계정에 비번은 1234, 권한은 기본권한)
+     ** localhost 에서만 접속 가능한 계정 생성
+       my db 에서 조회,추가,수정,삭제,생성,테이블삭제 등을 할수 있는 권한
+5버전     
+grant alter,select,insert,update,delete,create,drop on my.* to angel@localhost 
+             identified by '1234';
+ 
+    ** 원격으로도 접속가능하게 만들려면(모든 db 에서 사용가능)
+      grant alter,select,insert,update,delete,create,drop on *.* to angel2@'%' 
+             identified by '1234';
+    
+   ** 모든 권한주기
+	grant all privileges on *.* to angel@'%' identified by '1234' with grant option;
+
+8버전 
+	create user angel@'%' identified by '1234'; -- 계정 생성
+	grant all privileges on *.* to angel@'%' with grant option; -- 권한
+	flush privileges; -- 권한 테이블 변경
+	select User from user; -- 확인
+
+  4. select User from user; <=생성된 계정 확인
+
+  5. 계정 삭제
+     반드시 root 계정을 접속후 use mysql(db 이동) 에서만 삭제가능
+     delete from user where User='angel'; => angel 계정 삭제
+
+  
+원경으로 mysql 접속하는 방법
+ mysql -h 원격지ip -u 아이디 -p (엔터)
+ 비밀번호
+   
+원격에 있는 테이블 가져오는 방법
+ mysqldump -h 원격지ip -u 계정 -p db명 테이블명>가져올경로/파일명.sql
+
+=====================================================================
+[연습문제]
+mysql 로 테이블 생성하기
+
+1. 테이블명 : person
+   num  smallint 자동증가  기본키
+   name 문자(20)
+   age 숫자
+   sal 급여
+
+  [풀이]
+  create table person
+  (num smallint auto_increment primary key,
+    name varchar(20),age smallint,sal int);
+
+
+2. 데이타 추가
+   '이하나',34,340
+   '홍길동',27,230
+   '김길동',30,310
+   '박길동',29,280
+   '이두나',32,360
+
+  insert into person (name,age,sal) values ('이하나',34,340);
+  insert into person (name,age,sal) values ('홍길동',27,230);
+  insert into person (name,age,sal) values ('김길동',30,310);
+  insert into person (name,age,sal) values ('박길동',29,280);
+  insert into person (name,age,sal) values ('이두나',32,360);
+
+
+3. 나이의 오름차순으로 출력하기
+   select * from person order by age asc;
+
+4. 급여의 내림차순으로 출력하기
+   select * from person order by sal desc;
+
+5. 평균급여보다 많은 직원 출력하기
+  select * from person where sal>(select avg(sal) from person);
+
+6. 평균나이보다 나이가 많은 인원수 구하기
+   select count(*) from person where age>(select avg(age) from person);
+
+7. 다음과같이 출력하기
+  이름,나이,급여,급여가 300이상이면 'Good','ㅠㅠㅠ'ㅡ->컬럼제목은 내월급
+   select name,age,sal,if(sal>=300,'Good','ㅠㅠㅠ') 내월급 from person;
+
+8. 박길동의 나이를 33 으로 급여를 310 으로 수정하기
+   update person set age=33,sal=310 where name='박길동';
+
+9. 이두나 삭제하기
+   delete from person where name='이두나';
+
+
+Join 연습
+
+create table bitclass (
+   idx smallint primary key,
+   class varchar(30),
+   price int,
+   gigan smallint);
+
+create table stu (
+   num smallint auto_increment primary key,
+   name varchar(20),
+   idx smallint,
+   sugangday date,
+   constraint stu_fk_idx foreign key(idx) references bitclass(idx));
+
+--bitclass 에 데이타 추가
+insert into bitclass values (100,'Java',110000,10);
+insert into bitclass values (200,'HTML5',90000,8);
+insert into bitclass values (300,'jQuery',130000,12);
+insert into bitclass values (400,'Oracle',180000,20);
+
+--stu 에 데이타 추가
+insert into stu (name,idx,sugangday) values ('kim',200,now());
+insert into stu (name,idx,sugangday) values ('lee',100,now());
+insert into stu (name,idx,sugangday) values ('son',300,now());
+insert into stu (name,idx,sugangday) values ('min',400,now());
+
+--join
+
+--join 1
+select * from bitclass bc,stu where bc.idx=stu.idx;
+
+--join 2
+select name,class,price,gigan,sugangday from bitclass bc,stu
+  where bc.idx=stu.idx;
+
+--join 3
+select name,class,price,gigan,sugangday from bitclass bc 
+	inner join stu on bc.idx=stu.idx;
+
+--조인 연습 2 --
+create table shop (
+idx smallint auto_increment primary key,
+sang varchar(20));
+
+insert into shop (sang) values ('블라우스');
+insert into shop (sang) values ('티셔츠');
+
+ select * from shop;
+ 
+ create table cart (
+ num smallint auto_increment primary key,
+ name varchar(20),
+ idx smallint,
+ foreign key(idx) references shop(idx));
+
+ insert into cart (name,idx) values ('lee',1);
+ insert into cart (name,idx) values ('kim',3);
+ 
+ select * from cart;
+ 
+select * from shop,cart where shop.idx=cart.idx;
+
+SELECT *
+FROM shop
+INNER JOIN cart
+ON shop.idx=cart.idx;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

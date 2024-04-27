@@ -60,7 +60,7 @@ public class Ex3SawonSearchName {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 rs.close();
                 stmt.close();
@@ -74,7 +74,7 @@ public class Ex3SawonSearchName {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         Ex3SawonSearchName ex3=new Ex3SawonSearchName();
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String searchName="";
         while(true)
         {
