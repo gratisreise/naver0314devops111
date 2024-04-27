@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+        div{
+            float: left;
+            width: 70px;
+            height: 70px;
+            text-align: center;
+            line-height: 70px;
+            font-size: 2em;
+            font-weight: bold;
+            font-family: 'Jua';
+            cursor: pointer;
+            border: 1px solid black;
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        $(function(){
+            //6개의 div 에 랜덤하게 배경색 지정하고 번호 출력
+            $("div").each(function(idx){
+                let r=parseInt(Math.random()*256);
+                let g=parseInt(Math.random()*256);
+                let b=parseInt(Math.random()*256);
+
+                $(this).css("background-color",`rgb(${r},${g},${b})`)
+                .text(idx);                
+            });
+            //div 이벤트: 해당 배경색을 얻어서 h2에 출력하기
+            $("div").click(function(){
+                let bg=$(this).css("background-color");
+                $("h2").text(bg);
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--div 6개-->
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <h2 style="clear: both;"></h2>
+
+</body>
+</html>

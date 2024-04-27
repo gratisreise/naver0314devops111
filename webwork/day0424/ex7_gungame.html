@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+
+
+        body{
+            margin: 0; padding: 0;
+            background: #fff1c6 url('../image/jquery_image/bg.png') center center;
+            background-size: cover;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        body,html{
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #sunban-wrapper{
+            width: 780px;
+            margin: 50px auto;
+        }
+
+        #control-wrapper{
+            width: 300px;
+            height: 420px;
+            position: fixed;
+            left:0;
+            bottom: 0;
+        }
+
+        .sunban{
+            height: 150px;
+            margin-bottom: 50px;
+            width: 800px;
+            background: url('../image/jquery_image/sunban.png') no-repeat center bottom;
+        }
+
+        .sunban li{
+            cursor: pointer;
+            float: left;
+            width: 128px;
+            height: 128px;
+        }
+
+        .money li{
+            cursor: pointer;
+        }
+
+        .gun{
+            width: 300px;
+            height: 250px;
+            background: url('../image/jquery_image/gun.png') no-repeat;
+            cursor: pointer;
+            text-indent: -9999px;
+        }
+
+        .gun:active{
+            background-position: left bottom;
+        }
+
+        #msg{
+            clear: both;
+            position: absolute;
+            left:700px;
+            top:500px;
+            width: 400px;
+            height: 90px;
+            font-size: 22px;
+            border: 10px groove orange;
+            text-align: center;
+            line-height: 90px;
+        }
+    </style>
+
+    <script>
+        $(function(){
+            //총을 클릭하면 0~11 사이 난수발생후 해당인형을 사라지게 하기
+            //이미 사라진경우 없다는 메세지
+            $(".gun").click(function(){
+                let fire=new Audio("../image/fire.wav");
+                fire.play();
+
+                let idx=parseInt(Math.random()*12);
+
+                if($(".sunban img").eq(idx).is(":hidden")){
+                    $("#msg").html(`${idx+1}번째 인형은 없습니다`);
+                }else{
+                    //$(".sunban img").eq(idx).hide();
+                    $(".sunban img").eq(idx).fadeOut('fast');
+                    $("#msg").html(`${idx+1}번째 인형을 맞췄습니다!`);
+                }
+
+                //12개가 모두 hidden 이면 게임이 종료되었습니다
+                let hidden_len=$(".sunban>li>img:hidden").length;
+
+                if(hidden_len==12){
+                    $("#msg").html("게임이 종료되었습니다!!!");
+                }
+            });
+
+            //지폐 클릭시 지폐는 사라지게 하고 모든 게임은 초기화
+            $("ul.money img").click(function(){
+                //모든 인형은 다시 나타나게 하기
+                $(".sunban img").show();
+                //메세지 지우기
+                $("#msg").html("");
+                //화폐 사라지게
+                //$(this).css("display","none");//자리를 차지하지 않음
+                $(this).css("visibility","hidden");//자리를 차지함
+            })
+        });
+    </script>
+</head>
+<body>
+<div id="control-wrapper">
+    <div class="gun">총</div>
+    <ul class="money">
+        <li>
+            <img src="../image/jquery_image/money.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/money.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/money.png">
+        </li>
+    </ul>
+</div>
+
+<div id="sunban-wrapper">
+    <ul class="sunban">
+        <li>
+            <img src="../image/jquery_image/01.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/02.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/03.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/04.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/05.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/06.png">
+        </li>
+    </ul>
+
+    <ul class="sunban">
+        <li>
+            <img src="../image/jquery_image/07.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/08.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/09.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/10.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/11.png">
+        </li>
+        <li>
+            <img src="../image/jquery_image/12.png">
+        </li>
+    </ul>
+</div>
+<div id="msg"></div>
+</body>
+</html>

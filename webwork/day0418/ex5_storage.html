@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+    </style>
+   <script>
+    let selcar,carname,carimg;
+    
+    function init()
+    {
+        //로칼스토리지에 저장한 값을 읽어서 초기값을 변경해보자
+        let photo=localStorage.photo;
+        let photoname=localStorage.photoname;
+        let sindex=Number(localStorage.selindex);
+
+        //적용
+        carimg.setAttribute("src",photo);
+        carname.innerText=photoname;
+        selcar.selectedIndex=sindex;
+    }
+
+     window.onload=function(){
+        selcar=document.querySelector(".selcar");
+        carname=document.querySelector(".carname");
+        carimg=document.getElementsByTagName("img")[0];
+
+        init();
+
+        selcar.onchange=function(){
+            let cvalue=this.value;
+            console.log(cvalue);
+            let cname=this.options[this.selectedIndex].label;
+            console.log(cname);
+            carimg.setAttribute("src",cvalue);
+            carname.innerText=cname;
+
+            //로칼스토리지에 저장할 내용
+            //1. 이미지 src
+            localStorage.photo=cvalue;
+            //2. 이미지명
+            localStorage.photoname=cname;
+            //3.선택한 select 의 인덱스
+            localStorage.selindex=this.selectedIndex;
+        }
+     }
+   </script>
+</head>
+<body>
+ <h6 class="alert alert-success">선택한 값을 유지시켜보자</h6>
+ <img src="../image/mycar/mycar13.png" width="250">
+ <h5 class="carname">핑크자동차</h5>  
+ 
+ <br><br>
+ <select class="form-select selcar" style="width: 150px;">
+    <script>
+        let car=["mycar13","mycar11","mycar15","mycar7","mycar5"];
+        let names=["핑크자동차","노랑자동차","노랑봉고차","노랑미니","초록미니"];
+        for(let idx in car){
+            let s=`<option value="../image/mycar/${car[idx]}.png">
+                ${names[idx]}</option>`;
+            document.write(s);
+        }       
+    </script>
+ </select>
+</body>
+</html>

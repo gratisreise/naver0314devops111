@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <style>
+        body *{
+            font-family: 'Jua';     
+        }
+    </style>
+    <script>
+        let photo,pname;
+
+        function init()
+        {
+            //로칼스토리지의 값 불러와서 적용하기
+             //사진src : photosrc, 이름 : photoname, 인덱스:photoindex
+             //로칼스토리지에 "linecolor" 에 선색상 저장,lineindex 에 인덱스저장
+             photo.setAttribute("src",localStorage.photosrc);
+             pname.innerText=localStorage.photoname;
+             photo.style.borderColor=localStorage.linecolor;
+
+             document.querySelector(".selcolor").selectedIndex=localStorage.lineindex;
+             document.querySelector(".selphoto").selectedIndex=localStorage.photoindex;
+
+
+        }
+        window.onload=function(){
+            photo=document.querySelector(".largephoto");
+            pname=document.querySelector(".photoname");
+
+            init();//로칼스토리지의 값 적용하기
+
+            //사진 클릭시 모달다이얼로그 사진 변경하기
+            photo.onclick=function(){
+                let src=this.getAttribute("src");
+                document.querySelector(".modalphoto").setAttribute("src",src);
+            }
+
+            //문제1 : 선굵기 변경시 사진의 border 굵기 변경하기
+            document.querySelector(".selwidth").onchange=function(){
+                photo.style.borderWidth=this.value+"px";
+            }
+
+            //문제2 : 선색상 변경시 사진의 border color 변경
+            document.querySelector(".selcolor").onchange=function(){
+                photo.style.borderColor=this.value;
+
+                //로칼스토리지에 "linecolor" 에 선색상 저장,lineindex 에 인덱스저장
+                localStorage.linecolor=this.value;
+                localStorage.lineindex=this.selectedIndex;
+            }
+            //문제3 : 사진 변경시 value 값얻어서 사진변경하고 label 값 얻어서 이름변경하기
+            document.querySelector(".selphoto").onchange=function(){
+                //사진변경
+                photo.setAttribute("src",this.value);
+                //이름 얻기
+                let n=this.options[this.selectedIndex].label;
+                pname.innerText=n;
+
+                //사진 변경시 3가지 로칼스토리지에 저장
+                //사진src : photosrc, 이름 : photoname, 인덱스:photoindex
+                localStorage.photosrc=this.value;
+                localStorage.photoname=n;
+                localStorage.photoindex=this.selectedIndex;
+
+            }
+            //문제4 : 선종류 변경시 사진의 border style 변경
+            document.querySelector(".selstyle").onchange=function(){
+                photo.style.borderStyle=this.value;
+            }
+            //굵게
+            document.getElementById("ckbold").onclick=function()
+            {
+                 if(this.checked)
+                      pname.style.fontWeight='bold';
+                 else
+                      pname.style.fontWeight='normal';   
+            }
+
+            //밑줄
+             document.getElementById("ckunder").onclick=function()
+            {
+                if(this.checked)
+                      pname.style.textDecoration="underline"
+                 else
+                      pname.style.textDecoration='none'; 
+            }
+            //이탤릭
+            document.getElementById("ckitalic").onclick=function()
+            {
+                if(this.checked)
+                      pname.style.fontStyle="italic"
+                 else
+                      pname.style.fontStyle="normal"
+            }
+        }
+
+    </script>
+</head>
+<body>
+<!-- The Modal -->
+<div class="modal" id="myPhoto">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">원본 사진 확인</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <img src="" class="modalphoto" style="width: 100%;">
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+<table style="width: 500px;"  class="table table-bordered">
+    <caption align="top"><h6><b>사진꾸미기</b></h6></caption>
+    <tr>
+        <td style="width:300px" rowspan="4" align="center">
+            <img src="../image/talent/15.jpg" width="180"
+            class="largephoto"
+            style="border: 5px inset gold;cursor: pointer;"
+            data-bs-toggle="modal" data-bs-target="#myPhoto">
+        </td>
+        <td style="width: 70px;">선굵기</td>
+        <td>
+            <select class="form-select selwidth">
+             <script>
+                for(let i=1;i<=20;i+=2){
+                    let s=`<option ${i==5?"selected":""}>${i}</option>`;
+                    document.write(s);
+                }
+             </script>   
+            </select> 
+        </td>
+    </tr>
+    <tr>
+        <td>선색상</td>
+        <td>
+            <select class="form-select selcolor">
+                <option value="gold">골드색</option>
+                <option value="gray">회색</option>
+                <option value="hotpink">핑크색</option>
+                <option value="green">초록색</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>사진</td>
+        <td>
+            <select class="form-select selphoto">
+              <script>
+                let arr1=[
+                    ["../image/talent/15.jpg","설현"],
+                    ["../image/talent/17.jpg","신민아"],
+                    ["../image/talent/18.jpg","신세경"],
+                    ["../image/talent/19.jpg","수지"],
+                    ["../image/talent/2.jpg","김우빈"]                   
+                ];
+                //문제:option 의 value에 사진을 ,label에 이름을 넣으세요
+                for(let a of arr1)
+                {
+                    document.write(`<option value="${a[0]}">${a[1]}</option>`);
+                }
+              </script> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>선종류</td>
+        <td>
+            <select class="form-select selstyle">
+              <script>
+                let arr2=[
+                   "solid","dashed","dotted","double","inset","groove"                
+                ];
+                //문제:option 의 label에 이름을 넣으세요(기본 inset 에 selected 추가)
+                for(let a of arr2){
+                    document.write(`<option ${a=='inset'?"selected":""}>${a}</option>`);
+                }
+              </script> 
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <h5 class="photoname">설현</h5>
+        </td>
+        <td colspan="2" align="center">
+            <label>
+                <input type="checkbox" id="ckbold" class="form-check-input">굵게
+            </label>
+            <label>
+                <input type="checkbox" id="ckunder" class="form-check-input">밑줄
+            </label>
+            <label>
+                <input type="checkbox" id="ckitalic" class="form-check-input">이탤릭
+            </label>
+        </td>
+    </tr>
+</table>   
+</body>
+</html>

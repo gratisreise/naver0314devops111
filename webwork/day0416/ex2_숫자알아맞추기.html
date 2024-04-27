@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.numimage{
+            position: absolute;
+            top: 50px;
+            left: 300px;
+        }
+
+        div.result{
+            position: relative;
+            top:30px;
+            width: 250px;
+            border: 2px solid gray;
+            padding: 5px;
+            height: auto;
+        }
+    </style>
+    <script>        
+        let r,ni,num,rnd,cnt;
+
+        window.onload=function(){
+         r=document.querySelector(".result");
+         ni=document.querySelector(".numimage");
+         num=document.getElementById("txtnum");
+
+         init();//초기화 함수 호출
+         
+         //초기화 버튼 이벤트
+         document.getElementById("btninit").onclick=init;
+
+         //숫자 입력시 이벤트
+        num.onkeyup=function(e){
+                //입력시마다 숫자를 읽어서 숫자이미지 출력하기
+                //isNaN(Not a Number?):문자일경우 true,숫자일경우 false
+                //문자가 있을경우 경고메세지후 이벤트 종료
+                if(isNaN(this.value)){
+                    alert("숫자로만 입력해주세요");
+                    num.value="";
+                    return;
+                }
+
+                //입력하는 숫자를 분석해서 숫자 이미지로 나타내기
+                let tag="";
+                for(let i=0;i<this.value.length;i++){
+                    let n=this.value.charAt(i);
+                    tag+=
+                        `<img src="../image/number/${n}.gif">`;
+                }
+                ni.innerHTML=tag;
+                ///////////////////////////////
+
+
+                if(e.keyCode==13){
+                    check();
+                }
+            }
+
+            //확인 버튼 클릭시에도 숫자 비교
+            document.getElementById("btnresult").onclick=check;
+        }
+
+        //초기화 함수
+        function init()
+        {
+            //1~100 사이의 난수 발생
+            rnd=parseInt(Math.random()*100)+1;
+            cnt=0;
+            r.innerHTML="";
+            num.value="";
+            ni.innerHTML="";
+        }
+        
+        function check()
+        {
+            let n=Number(num.value);
+           // r.innerHTML=n;
+           cnt++;
+           let tag="";
+           if(n>rnd)
+                tag=`${cnt}회 : ${n}보다 작습니다<br>`;
+            else if(n<rnd)
+                tag=`${cnt}회 : ${n}보다 큽니다<br>`;
+            else{
+                tag=`정답입니다. <b style="color:red;">정답은 ${rnd}</b><br>`;
+            }
+
+            //기존 html 에 추가
+            r.innerHTML+=tag;
+            //입력값 지우기
+            num.value="";
+        }
+    </script>
+</head>
+<body>
+<input type="text" style="width: 100px;" id="txtnum"
+  autofocus>
+  <button type="button" id="btnresult">확인</button>
+  <button type="button" id="btninit">초기화</button>
+
+<div class="numimage"></div>
+<div class="result"></div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <style>
+        body *{
+            font-family: 'Gamja Flower';
+        }
+
+        div.dateview{
+            margin: 40px 20px;
+        }
+
+        div.dateview table{
+            border: 5px groove gray;
+            border-collapse: collapse;
+            width: 500px;
+            font-size: 20px;
+        }
+
+        div.dateview table thead tr,div.dateview table thead th{
+            height: 50px;
+            background-color: #e0ffff;
+            color: #c71585;
+            border-bottom: 4px double green;
+        }
+        div.dateview table thead th{
+            border-right: 1px solid green;
+        }
+
+        div.dateview table tbody tr,div.dateview table tbody td{
+            height: 50px;
+            border:1px solid green;
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+    <script>
+        let dview;
+
+        window.onload=function(){
+            dview=document.querySelector("div.dateview");
+
+            calendarView();//처음 시작시 현재년,월로 달력 출력하기
+            //select 이벤트
+            document.getElementById("selyear").onchange=function(){
+                curyear=Number(this.value);
+                calendarView();
+            }
+
+            document.getElementById("selmonth").onchange=function(){
+                curmonth=Number(this.value);
+                calendarView();
+            }
+        }
+
+        function calendarView()
+        {
+            //선택한 년도,월의 1일에 해당하는 date 생성
+            let newdate=new Date(curyear,curmonth-1,1);
+            //alert(`${newdate.getFullYear()},${newdate.getMonth()+1},${newdate.getDay()}`);
+            let tag="";
+            tag+=
+            `
+            <table>
+                <thead>
+                    <tr>
+                        <th>일</th><th>월</th><th>화</th>
+                        <th>수</th><th>목</th><th>금</th><th>토</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            //요일 숫자 구하기
+            let week;
+            week=newdate.getDay();
+        
+            //해당년도의 월이 몇일까지 있는지 구하기
+            let endday;
+            switch(curmonth){
+                case 2:
+                    endday=curyear%4==0&&curyear%100!=0||curyear%400==0?29:28;
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    endday=30;
+                    break;
+                default:
+                    endday=31;
+            }
+
+            //요일숫자만큼 td반복
+            tag+="<tr>";
+            for(let i=1;i<=week;i++){
+                tag+="<td></td>";
+            }
+
+            //1일부터 endday까지 출력
+            //단 토요일이 되면 출력후 tr닫고 다시 열기
+            for(let i=1;i<=endday;i++){
+                week++;//7의 배수가 나오면 토요일이다
+                tag+=`<td style="color:${week%7==1?'red':'black'}">${i}</td>`;
+                if(week%7==0){
+                    if(i==endday)
+                      tag+="</tr>";
+                    else
+                        tag+="</tr><tr>";
+                }
+            }
+
+            if(week%7!=0){//토욜일에서 끝나지 않은경우
+                while(true){
+                    week++;
+                    tag+=`<td></td>`;
+                    if(week%7==0){//토요일이 되면 행을닫고 반복문을 끝낸다
+                        tag+="</tr>";
+                        break;
+                    }
+                }
+            }
+            tag+="</tbody></table>";
+            dview.innerHTML=tag;
+        }
+    </script>
+</head>
+<body>
+<!-- <script>
+    //let date1=new Date(2024,3,1);//2024,4,1
+    let date1=new Date(2023,11,1);//2023,12,1
+    let y=date1.getFullYear();
+    let m=date1.getMonth()+1;
+    let d=date1.getDate();
+    let w=date1.getDay();//일:0 월:1..토:6
+
+    let s=
+    `
+     ${y}-${m}-${d} 요일숫자:${w}
+    `;
+    document.write("<h2>"+s+"</h2>");
+</script>     -->
+<div style="margin-left: 100px;">
+    <h2>자바스크립트로 달력 구현하기</h2>
+    <script>
+        let curdate=new Date();//현재 날짜 구하기
+        let curyear=curdate.getFullYear();//현재 년도
+        let curmonth=curdate.getMonth()+1;//현재월
+    </script>
+    
+    <select id="selyear" style="font-size: 22px;">
+        <script>
+            for(let y=curyear;y>=1950;y--){
+                document.write(`<option>${y}</option>`);
+            }
+        </script>
+    </select>
+    년
+    &nbsp; &nbsp;
+    
+    <select id="selmonth" style="font-size: 22px;">
+        <script>
+            for(let m=1;m<=12;m++){
+                document.write(`<option ${m==curmonth?"selected":""}>${m}</option>`);
+            }
+        </script>
+    </select>
+    월 선택
+</div>
+<div class="dateview">11</div>
+</body>
+</html>

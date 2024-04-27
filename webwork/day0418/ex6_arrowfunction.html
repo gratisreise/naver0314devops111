@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function f1(){
+        document.write("f1 함수 호출<br>");
+    }
+    f1();
+
+    let f2=function(){
+        document.write("f2 함수 호출<br>");
+    }
+
+    f2();
+
+    let f3=()=>document.write("f3 함수호출<br>");
+
+    f3();
+
+    function add1(x,y){
+        return x+y;
+    }
+
+    let sum1=add1(5,6);
+    document.write("add1호출:"+sum1+"<br>");
+
+    let add2=(x,y)=>x+y;//한줄일경우 return 생략
+    let sum2=add2(10,30);
+    document.write("add2 호출 :"+sum2+"<br>");
+
+    // setTimeout(function(){
+    //     document.write("3초가 지났어요!!");
+    // },3000);
+
+    setTimeout(()=>document.write("3초지남!!"),3000);
+
+</script>    
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <script>
+    let study=["html","css","web","jquery"];
+    for(let s of study)
+        document.write("<h6>"+s+"</h6>");
+
+    //배열의 데이타 잘라내기
+    document.write("<hr>");
+    let newStudy=study.splice(2,1);//2번 인덱스부터 1개 반환,study 에서도 제거
+    for(let s of newStudy)
+        document.write("<h6>"+s+"</h6>");//web 만 나옴
+
+    document.write("<hr>");
+   for(let s of study)
+        document.write("<h6>"+s+"</h6>");//web 이 제거된 나머지가 나옴
+ </script>   
+</body>
+</html>

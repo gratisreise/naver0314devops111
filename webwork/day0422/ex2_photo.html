@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+        .photo{
+            width: 50px;
+            height: 50px;
+            border: 1px solid gray;
+        }
+
+        td{
+            cursor: pointer;
+        }
+
+        div.result{
+            margin: 10px 30px;
+            border: 3px solid gray;
+            padding: 10px;
+            width: 300px;
+            height: 400px;
+        }
+    </style>
+
+</head>
+<body>
+<table class="table table-bordered" style="width: 320px;">
+    <script>
+        //4행5열의 테이블
+        let s="";
+        let idx=1;
+        for(let row=1;row<=4;row++)
+        {
+            s+="<tr>";
+            for(let col=1;col<=5;col++){
+                //배경색은 랜덤하게
+                let r=parseInt(Math.random()*256);
+                let g=parseInt(Math.random()*256);
+                let b=parseInt(Math.random()*256);
+                
+                s+=
+                `
+                    <td align=center style="background-color:rgb(${r},${g},${b})">
+                        <img class="photo" src="../image/talent/${idx++}.jpg">
+                    </td>
+                `;
+                
+            }
+            s+="</tr>";
+        }
+        document.write(s);
+    </script>
+</table> 
+<div class="result">
+    <img src="../image/talent/1.jpg" width="265" height="370">
+</div>
+<script>
+    //작은 사진(.photo) 에 마우스를 올리면 큰사진에 나오고
+    //배경색도 얻어서 큰사진의 배경색에 적용
+    $("img.photo").click(function(){
+        //현재 이미지
+        let imgSrc=$(this).attr("src");
+        //배경색
+        let bg=$(this).parent().css("background-color");
+
+        //적용
+        $("div.result").css("background-color",bg);
+        $("div.result>img").attr("src",imgSrc);
+    });
+</script>
+</body>
+</html>

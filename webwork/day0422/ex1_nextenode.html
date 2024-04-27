@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+
+        div.one figure{
+            float: left;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        div.one figure figcaption{
+            text-align: center;
+        }
+
+        div.result{
+            clear: both;
+            margin-left: 100px;
+        }
+
+        div.two div.box{
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            float: left;
+            margin: 5px;
+            border: 1px solid gray;
+        }
+
+        div.result2{
+            margin: 30px 50px;
+            border: 2px inset gray;
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(function(){
+            //figure 의 이미지에 마우스를 올리면
+            //이미지와 타이틀을 얻어서 result 에 출력하시오
+            $("div.one>figure>img").mouseover(function(){
+                //현재 마우스위치에 있는 이미지의 src
+                let imgSrc=$(this).attr("src");
+                //제목
+                //let title=$(this).next().find("b").text();
+                let title=$(this).next().children("b").text();
+                //적용
+                $("div.result>img").attr("src",imgSrc);
+                $("div.result h3>b").text(title);
+            });
+
+            //div.box 에 마우스를 올리면 영화제목과 별점을 result2에 출력
+            //그리고 box 의 배경색을 얻어서 rsult2 의 배경색으로 지정
+            $("div.two>div.box").mouseover(function(){
+                //배경색
+                let bg=$(this).css("background-color");
+                //배경색 적용
+                $("div.result2").css("background-color",bg);
+
+                //영화제목
+                let title=$(this).next().text();
+                //적용
+                $("div.result2>h1").text(title);
+
+                //별점
+                let star=$(this).next().next().find("span").text();
+                //적용
+                $("div.result2>h3").text(star);
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--
+    next:다음 태그
+    prev:이전 태그
+    find,children:하위태그에서 검색
+    parent:부모요소
+    siblings : 형제요소     
+    -->  
+    <div class="one">
+        <figure>
+            <img src="../image/jquery_image/08.png">
+            <figcaption>
+                <b>보라폭탄머리</b>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="../image/jquery_image/03.png">
+            <figcaption>
+                <b>춤추는아이</b>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="../image/jquery_image/04.png">
+            <figcaption>
+                <b>바나나를 든아이</b>
+            </figcaption>
+        </figure>
+    </div>
+    <div class="result">
+        <img src="../image/jquery_image/01.png">
+        <br>
+        <h3><b>제목나오는곳</b></h3>
+    </div>
+    <hr>
+    <div class="two">
+        <div class="box" style="background-color: aquamarine;"></div>
+        <h3>파묘</h3>
+        <div class="message">
+            <span>★★★★☆</span>
+        </div>
+        <div class="clear"></div>
+
+        <div class="box" style="background-color: chartreuse;"></div>
+        <h3>범죄도시4</h3>
+        <div class="message">
+            <span>★★★★☆</span>
+        </div>
+        <div class="clear"></div>
+
+        <div class="box" style="background-color: palevioletred;"></div>
+        <h3>선재업고튀어</h3>
+        <div class="message">
+            <span>★★★★★</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="result2">
+        <h1>메세지는 요기에</h1>
+        <h3>별점은 요기에</h3>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+
+        div.mytooltip{
+            position: absolute;
+            line-height: 1.5;
+            color: black;
+            width: 200px;
+            background-color: #f90;
+            border: 2px solid white;
+            padding: 15px;
+            font-size: 14px;
+            border-radius: 30px;
+            opacity: 0.8;
+            display: none;
+        }
+
+        .view{
+            cursor: pointer;
+            background-color: #ccc;
+            font-size: 1.3em;
+        }
+
+        ol.today li{
+            cursor: pointer;
+            font-size: 22px;
+            width: 200px;
+        }
+        ol.today li:hover{
+            background-color: rgba(0,0,0,0.3);
+        }
+    </style>
+    <script>
+        $(function(){
+            //bind:이벤트를 묶어서 한꺼번에 처리
+            $("a").bind({
+                mousemove:function(e){
+                    //e.pageX:커서의 x좌표,e.pageY:커서의 y좌표,
+                    //툴팁의 위치를 마우스포인터 위치로 변경
+                    $("div.mytooltip").css({
+                        'left':e.pageX+'px',
+                        'top':e.pageY+"px"
+                    });
+                },
+                mouseover:function(e){
+                    $("div.mytooltip").fadeIn('fast');
+                    $("div.mytooltip").html(
+                        ` Java<br>
+                        HTML<br>
+                        CSS<br>
+                        Mysql`
+                    ).css("background-color","#f90");
+                },
+                mouseout:function(e){
+                    $("div.mytooltip").fadeOut('fast');
+                }
+            });
+
+            $("b.view").bind({
+                mousemove:function(e){
+                    //e.pageX:커서의 x좌표,e.pageY:커서의 y좌표,
+                    //툴팁의 위치를 마우스포인터 위치로 변경
+                    $("div.mytooltip").css({
+                        'left':e.pageX+'px',
+                        'top':e.pageY+"px"
+                    });
+                },
+                mouseover:function(e){
+                    $("div.mytooltip").fadeIn('fast');
+                    //b태그의 text 와 color 얻기
+                    let text=$(this).text();
+                    let color=$(this).attr("color");
+
+                    $("div.mytooltip").html(
+                        `
+                        현재 관심 사항<br>
+                        ${text}`
+                    ).css("background-color",color);
+                },
+                mouseout:function(e){
+                    $("div.mytooltip").fadeOut('fast');
+                }
+            });
+
+            $("ol.today>li").bind({
+                mousemove:function(e){
+                    //e.pageX:커서의 x좌표,e.pageY:커서의 y좌표,
+                    //툴팁의 위치를 마우스포인터 위치로 변경
+                    $("div.mytooltip").css({
+                        'left':e.pageX+'px',
+                        'top':e.pageY+"px"
+                    });
+                },
+                mouseover:function(e){
+                    //photo 와 text를 얻어서
+                    //툴팁의 html 에 넣어주세요
+                    let photo=$(this).attr("photo");
+                    let sname=$(this).text();
+                    
+                    $("div.mytooltip").fadeIn('fast');
+
+                    $("div.mytooltip").html(
+                        `<h5>${sname}</h5>
+                        <img src="${photo}" width=100>`
+                    ).css('background-color',rgb(255,200,255));
+
+                },
+                mouseout:function(e){
+                    $("div.mytooltip").fadeOut('fast');
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <h4 class="alert alert-info">Tooltip 링크 부분에 마우스를 올려보세요</h4>
+    <br><br>
+    <a style="font-size: 25px;cursor: pointer;">
+        Tooltip  Tooltip  Tooltip  Tooltip  Tooltip  Tooltip 
+        Tooltip  Tooltip  Tooltip  Tooltip 
+    </a>
+    <pre>
+        2007년 <b class="view" color="pink">제17대 대통령</b>선거에서 비슷한 공약이 
+        나왔을 땐 재밌는 상상 정도로 취급됐죠. 
+        이제는 이 질문이 정부의 <b class="view" color="green">공식 설문</b>에 등장했습니다. 
+        국민권익위원회가 벌이는 온라인 설문입니다. 
+        부영그룹이 직원들에 <b class="view" color="yellow">출산 장려금 1억</b> 원씩 
+        지급하기로 한 것처럼, 정부도 파격적인 
+        현금을 직접 지원하면 아이를 낳겠냐고 물은 겁니다. 
+        설문을 이달 17일부터 26일까지 진행하는데 
+        23일 오후 2시 현재까지 5000명이 넘게 참여해 
+        많은 <b class="view" color="lightgray">관심</b>을 받고 있습니다.
+    </pre>
+    <hr>
+    <h2>오늘 나의 식사및 쇼핑 목록입니다</h2>
+    <ol type="1" class="today">
+        <li photo="../image/food/1.jpg">에그샌드위치</li>
+        <li photo="../image/food/11.jpg">망고빙수</li>
+        <li photo="../image/shop/8.jpg">회색스웨터</li>
+        <li photo="../image/shop/29.jpg">여름용모자</li>
+    </ol>
+    <div class="mytooltip">
+        Java<br>
+        HTML<br>
+        CSS<br>
+        Mysql
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let colors=["red","green","blue","white","black"];
+    for(let c of colors)
+        document.write(c+"<br>");
+    document.write("<hr>");
+
+    let newColors=colors.slice(2,4);//2번부터 3번까지 잘라서 반환
+    for(let c of colors)
+        document.write(c+"<br>");//colors는 변화가 없음
+    document.write("<hr>");
+    for(let c of newColors)
+        document.write(c+"<br>");//blue,white 만 출력
+
+</script>  
+</body>
+</html>

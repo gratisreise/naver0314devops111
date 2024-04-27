@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+
+        body,ul,h1,h2{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            background-image: url('../image/jquery_image/bg2.png');
+            background-position: top;
+        }
+
+        li{list-style: none;}
+
+        div.album .cover{
+            float: left;
+            position: relative;
+            z-index: 10;/*겹쳐져있는 요소들 사이에서 z-index가 클수록 위로배치*/
+        }
+
+        div.album{
+            overflow: hidden;
+            width: 1100px;
+            height: 600px;
+            position: absolute;
+            left: 50%;
+            top:50%;
+            margin-left: -550px;
+            margin-top: -300px;
+        }
+
+        #cd{
+            float: left;
+            width: 300px;
+            height: 500px;
+            position: relative;
+            left: -60px;
+            top: 45px;
+            background-image: url('../image/jquery_image/cd-sprite.png');
+            background-position: right top;/*첫번째 cd*/
+        }
+
+        #cd.music1{background-position: right top;}
+        #cd.music2{background-position: right center;}
+        #cd.music3{background-position: right bottom;}
+
+        .select-music{
+            cursor: pointer;
+            width: 540px;
+            position: absolute;
+            left: 110px;
+            top:50px;
+            z-index: 100;/*cd커버보다는 위에*/
+        }
+        .select-music h1.title{
+            background-color: #fff;
+            background-image: url('../image/jquery_image/play.png');
+            background-repeat: no-repeat;
+            height: 40px;
+            line-height: 40px;
+            color: #f60;
+            text-indent: 45px;
+            font-size: 25px;
+        }
+
+        .select-music .music-list li{
+            height: 40px;
+            line-height: 40px;
+            color: #666;
+            text-indent: 15px;
+            font-size: 20px;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .select-music .music-list li:hover{
+            background-color: #f60;
+            color: #fff;
+        }
+
+        .select-music .music-list{
+            display: none;-
+        }
+    </style>
+    <script>
+        $(function(){
+            //1. h1.title 클릭시 .music-list 를 slideDown
+            $("h1.title").click(function(){
+                $("ul.music-list").slideDown('slow');
+            });
+            //노래제목 클릭시 클릭한곳의 제목을 얻어서 h1.title 에 넣은후 slideUp
+            $("ul.music-list li").click(function(){
+                //2. 노래제목얻기
+                let title=$(this).text();
+                //3. 2번의 제목을 h1.title에 넣기
+                $("h1.title").text(title);
+
+                //4. 클릭한곳의 class 를 얻는다
+                let selectClass=$(this).attr("class");
+
+                //5. cd effect 효과,animate 로 width를 0으로 주고 완성됐을때
+                //    #cd 에 위의 class 추가후 너비를 다시 300으로
+                $("#cd").animate({width:'0px'},'slow',function(){
+                    //animate 효과가 끝난후 호출되는 함수
+                    //노래제목에 있던 클래스 적용(cd교체)
+                    $("#cd").attr("class",selectClass);
+
+                    $(this).animate({width:'300px'},'slow');
+                });
+                //6. 노래제목 사라지게 하기(slideUp)
+                $("ul.music-list").slideUp('slow');
+            });
+          
+        });
+    </script>
+</head>
+<body>
+   <div class="album">
+     <div class="select-music">
+        <h1 class="title">Now Playing</h1>
+        <ul class="music-list">
+            <li class="music1">Lost Stars</li>
+            <li class="music2">A Higher Place</li>
+            <li class="music3">Like A Fool</li>
+        </ul>
+     </div>
+     <img src="../image/jquery_image/cover.png" class="cover">
+     <div id="cd"></div>
+   </div> 
+</body>
+</html>

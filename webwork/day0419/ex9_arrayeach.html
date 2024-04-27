@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+        div.a{
+            float: left;
+            width: 100px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            border: 2px solid black;
+            margin-right: 5px;
+        }
+    </style>
+    <script>
+        $(function(){
+            //$.each : 배열 갯수만큼 반복시켜주는 함수
+            let colors=["pink","gray","orange","yellow","green","magenta",
+                "tomato"];
+
+                //배열 갯수만큼 자동 반복된다
+                $.each(colors,function(idx,ele){
+                    $("div.a").eq(idx).text(ele).css("background-color",ele);
+                });
+        });
+    </script>
+</head>
+<body>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+    <div class="a"></div>
+</body>
+</html>

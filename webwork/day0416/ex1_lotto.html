@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.lotto{
+            width: 40px;
+            height: 40px;
+            border: 1px solid black;
+            border-radius: 100px;
+            margin-right: 3px;
+            float: left;
+            line-height: 40px;
+            text-align: center;
+            font-family: "Comic Sans MS";
+            margin: 3px;
+        }
+
+        #lottolist{
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            let list=document.getElementById("lottolist");
+            //select 이벤트
+            document.getElementById("selmoney").onchange=function(){
+                let tag="";
+
+                let money=Number(this.value);
+
+                for(let i=1;i<=money;i++){
+                    let arrlotto=new Array(6);
+                    console.log(arrlotto.length);
+                    //1~45 숫자를 구한후 중복처리하기
+                    for(let n=0;n<arrlotto.length;n++){
+                        arrlotto[n]=parseInt(Math.random()*45)+1;
+                        for(let m=0;m<n;m++){
+                            if(arrlotto[n]==arrlotto[m]){
+                                n--;
+                                break;
+                            }
+                        }
+                    }
+                    //오름차순 정렬하기
+                    for(let m=0;m<arrlotto.length-1;m++){
+                        for(let n=m+1;n<arrlotto.length;n++){
+                            if(arrlotto[m]>arrlotto[n]){
+                                let temp=arrlotto[m];
+                                arrlotto[m]=arrlotto[n];
+                                arrlotto[n]=temp;
+                            }
+                        }
+                    }
+
+                   for(let a of arrlotto){
+                        //배경 색상을 좀 연하게 하기위해서 150~249까지만 발생함
+                        let r=parseInt(Math.random()*100)+150;
+                        let g=parseInt(Math.random()*100)+150;
+                        let b=parseInt(Math.random()*100)+150;
+                        tag+=
+                            `
+                            <div class="lotto" 
+                                    style="background-color:rgba(${r},${g},${b},0.5);">
+                                ${a}
+                            </div>                        
+                            `;                        
+                   } 
+                   tag+=`<br style="clear:both">`;                             
+                } 
+                lottolist.innerHTML=tag;  
+                
+            }
+        }
+    </script>
+</head>
+<body>
+ <select id="selmoney">
+    <option hidden disabled selected>로또 횟수를 선택하세요</option>
+    <script>
+        for(let i=1;i<=10;i++){
+            let s=`<option>${i}</option>`;
+            document.write(s);
+        }
+    </script>    
+ </select>   
+ <div id="lottolist"></div>
+</body>
+</html>

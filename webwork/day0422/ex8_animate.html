@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+
+        div.one{
+            width: 60px;
+            height: 60px;
+            background-color: palevioletred;
+            margin-top: 10px;  
+            position: absolute;         
+        }
+    </style>
+
+</head>
+<body>
+<button type="button" class="btn btn-outline-danger btn-sm"
+ id="btn1">Animate#1</button>
+<div class="one"></div> 
+<script>
+    $("#btn1").click(function(){
+        $("div.one").animate({"left":"+=50px"},'slow').animate({'width':'+=50px','height':'+=50px'},2000);
+    });
+</script>
+<hr>
+<button type="button" class="btn btn-outline-danger btn-sm"
+ id="btn2" style="margin-top: 200px;">Animate#2</button>
+<div class="two" 
+style="font-family: 'Dancing Script';font-size: 20px;border: 2px solid red;width:250px">
+    jQuery Animate Test!!!!</div> 
+<script>
+    $("#btn2").click(function(){
+        $("div.two").animate({fontSize:'+=5px',width:'+=100px'},1000)
+        .animate({borderWidth:'+=3px'},1000);
+    });
+</script>
+<hr>
+<i class="bi bi-arrow-through-heart" style="font-size: 3em;"></i>
+<i class="bi bi-arrow-through-heart-fill"  style="font-size: 3em;"></i>
+<hr>
+<i class="bi bi-arrow-through-heart heart" 
+    style="font-size: 30px;cursor:pointer;color:red;"></i>
+<script>
+    //.heart 를 클릭시 채워진 하트로 바뀌고 , 만약 채워진 하트일경우 반대의
+    //비워진 하트가 나타나도록 이벤트를 구현하시오
+    $(".heart").click(function(){
+        //현재 클래스 얻기
+        let myClass=$(this).attr("class");
+        if(myClass=='bi bi-arrow-through-heart heart'){
+            $(this).attr("class","bi bi-arrow-through-heart-fill heart");
+            $(this).animate({fontSize:"100px"},2000,function(){
+                $(this).css("font-size","30px");
+            });
+        }else
+            $(this).attr("class","bi bi-arrow-through-heart heart");
+    })
+</script>
+</body>
+</html>

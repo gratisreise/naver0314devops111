@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+    </style>
+    <script>
+        $(function(){
+            //버튼1 이벤트
+            $("#btn1").click(function(){
+                //btn2 제거후 추가하기
+                $("#btn2").remove();
+
+                //새로운 버튼(id:btn2)를 추가
+                let nb=`<button type="button" id="btn2" 
+        class="btn btn-sm btn-outline-success">버튼 2</button>`;
+             $("div.mybutton").append(nb);
+
+             $("h2.msg").text("새로운 버튼을 추가했어요!!");
+            });
+
+            //버튼2 이벤트-결론은 이벤트가 발생하지 않는다
+            //처음 로딩시 존재하는것만 기본 이벤트가 작동한다
+        //     $("#btn2").click(function(){
+        //         //btn3 제거후 추가하기
+        //         $("#btn3").remove();
+
+        //         //새로운 버튼(id:btn3)를 추가
+        //         let nb=`<button type="button" id="btn3" 
+        // class="btn btn-sm btn-outline-success">버튼 3</button>`;
+        //      $("div.mybutton").append(nb);
+
+        //      $("h2.msg").text("새로운 버튼 3을 추가했어요!!");
+        //     });
+
+        //처음 로딩시 존재하지 않았던 모든 요소는 on 을 이용해서 이벤트를 구현해야 한다
+        //on 은 현재요소에 이벤트도 가능하다
+        $(document).on("click","#btn2",function(){
+             //btn3 제거후 추가하기
+             $("#btn3").remove();
+
+            //새로운 버튼(id:btn3)를 추가
+            let nb=`<button type="button" id="btn3" 
+            class="btn btn-sm btn-outline-success">버튼 3</button>`;
+            $("div.mybutton").append(nb);
+
+            $("h2.msg").text("새로운 버튼 3을 추가했어요!!");
+        });
+
+        $(document).on("click","#btn3",function(){
+             //btn4 제거후 추가하기
+             $("#btn4").remove();
+
+            //새로운 버튼(id:btn4)를 추가
+            let nb=`<button type="button" id="btn4" 
+            class="btn btn-sm btn-outline-success">버튼 4</button>`;
+            $("div.mybutton").append(nb);
+
+            $("h2.msg").text("새로운 버튼 4를 추가했어요!!");
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="mybutton">
+        <button type="button" id="btn1" 
+        class="btn btn-sm btn-outline-success">버튼 1</button>
+    </div>
+    <h2  class="msg"></h2>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=East+Sea+Dokdo&family=Jua&family=Gaegu&family=Gamja+Flower&family=Pacifico&family=Single+Day&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <style>
+        body *{
+            font-family: 'Jua';
+        }
+
+        a{text-decoration: none;}
+        ul li{list-style: none;}
+        
+        ul.menu{
+            background-color: darkgrey;
+            width: 200px;
+            border: 2px solid black;
+            border-radius: 20px;
+        }
+        li.main>a{
+            font-size: 30px;
+            font-family: 'East Sea Dokdo';            
+        }
+        li.main:hover{
+            color: red;
+            cursor: pointer;
+        }
+
+        ul.submenu{
+            color:green;
+            cursor: pointer;
+        }
+
+        ul.submenu>li:hover{
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script>
+        $(function(){
+           //서브메뉴는 처음에 안보이게 처리
+           $("ul.submenu").hide();
+           $("ul.submenu").eq(2).show();//기본적으로 정보광장만 보이게 하기
+
+
+           //메인메뉴 클릭시 서브메뉴가 나타나게 하는데
+           //이전에 클릭한 다른 서브메뉴는 사라지게 효과를 준다(slide 효과)
+           $("li.main>a").click(function(e){
+                e.preventDefault();//기본 이벤트를 무효화
+                $(this).siblings().slideDown('slow');
+                //다른 서브메뉴는 가라지게 하기
+                $(this).parent().siblings().find("ul.submenu").slideUp('slow');
+           });
+
+        });
+    </script>
+</head>
+<body>
+<!-- <a href="http://www.naver.com" onclick="event.preventDefault();alert('이동안됨')">네이버 이동</a> -->
+<ul class="menu">
+    <!--1번째 메뉴-->
+    <li class="main">        
+        <a>비트캠프</a>
+        <ul class="submenu">
+            <li>초대의 글</li>
+            <li>주변안내</li>
+            <li>찾아오시는길</li>
+        </ul>
+    </li>
+    <!--2번째 메뉴-->
+    <li class="main">        
+        <a>강의장안내</a>
+        <ul class="submenu">
+            <li>601클라우드반</li>
+            <li>602 AI반</li>
+            <li>701 데브옵스반</li>
+        </ul>
+    </li>
+    <!--3번째 메뉴-->
+    <li class="main">        
+        <a>정보광장</a>
+        <ul class="submenu">
+            <li>방명록</li>
+            <li>Q&A게시판</li>
+            <li>자유게시판</li>
+        </ul>
+    </li>
+    <!--4번째 메뉴-->
+    <li class="main">        
+        <a>과정안내</a>
+        <ul class="submenu">
+            <li>강남구청반</li>
+            <li>노동부과정</li>
+            <li>리액트단과반</li>
+        </ul>
+    </li>
+</ul>  
+</body>
+</html>
